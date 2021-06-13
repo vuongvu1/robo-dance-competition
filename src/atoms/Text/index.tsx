@@ -8,7 +8,7 @@ interface Props {
 
 const Text: React.FC<Props> = ({ type, color, children }) => {
   return (
-    <SC.Container as={type || "div"} type={type} color={color}>
+    <SC.Container as={type === "body" ? "p" : type} type={type} color={color}>
       {children}
     </SC.Container>
   );

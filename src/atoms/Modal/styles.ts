@@ -20,8 +20,8 @@ const SC = {
   Wrapper: styled.div<WrapperProps>(
     ({ theme }) => css`
       position: relative;
-      max-width: 80vw;
       min-width: 200px;
+      max-width: 600px;
       padding: ${theme.spacing.md};
       padding-top: 0;
       margin-bottom: 200px;
@@ -38,7 +38,8 @@ const SC = {
   ),
   Title: styled.div(
     ({ theme }) => css`
-      margin-right: ${theme.spacing.md};
+      margin: 0 ${theme.spacing.md};
+      text-align: center;
     `
   ),
 };

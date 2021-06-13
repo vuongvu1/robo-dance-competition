@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { Layout, Link } from "src/atoms";
-import { ResetButton } from "src/components";
+import { Layout } from "src/atoms";
+import { ResetButton, InstructionsButton } from "src/components";
 import { useStateWithLocalStorage } from "src/hooks";
 import { AppStates, StorageKeys } from "src/constants";
 import Home from "./home";
@@ -14,8 +14,6 @@ const Pages = () => {
   useEffect(() => {
     if (!appState) setAppState(AppStates.HOME);
   }, [appState, setAppState]);
-
-  const RulesBtn = <Link onClick={() => console.log("Rules")}>Rules</Link>;
 
   const renderScreen = (state: string) => {
     switch (state) {
@@ -32,7 +30,7 @@ const Pages = () => {
             title={
               <>
                 <ResetButton />
-                {RulesBtn}
+                <InstructionsButton />
               </>
             }
           >
