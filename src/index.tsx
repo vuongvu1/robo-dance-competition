@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "styled-components";
-import App from "./pages/home";
+import App from "./pages";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyles, { theme } from "./globalStyles";
 

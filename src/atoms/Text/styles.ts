@@ -9,20 +9,20 @@ const SC = {
 
       ${type === "h1" &&
       css`
-        font-weight: bold;
+        font-weight: ${theme.fontWeight.lg};
         font-size: ${theme.fontSize.lg};
       `}
 
       ${type === "h2" &&
       css`
-        font-weight: bold;
+        font-weight: ${theme.fontWeight.lg};
         font-size: ${theme.fontSize.md};
       `}
 
       ${type === "body" &&
       css`
         margin: 0;
-        font-weight: normal;
+        font-weight: ${theme.fontWeight.md};
         font-size: ${theme.fontSize.sm};
       `}
     `

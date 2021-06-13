@@ -1,0 +1,10 @@
+const AppStates = {
+  HOME: "HOME",
+  SET_NAME: "SET_NAME",
+  ASSIGNING_ROBOTS: "ASSIGNING_ROBOTS",
+  ROBOTS_ASSIGNED: "ROBOTS_ASSIGNED",
+  DANCING: "DANCING",
+  COMPETED: "COMPETED",
+};
+
+export default AppStates;

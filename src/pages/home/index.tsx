@@ -1,14 +1,20 @@
-import { Layout, Text, Button } from "src/atoms";
+import { FC } from "react";
+import { Text, Button } from "src/atoms";
+import { AppStates } from "src/constants";
 import SC from "./styles";
 
-const Home = () => {
+type Props = {
+  setAppState: (state: string) => void;
+};
+
+const Home: FC<Props> = ({ setAppState }) => {
   return (
-    <Layout>
-      <SC.Container>
-        <Text type="h1">The Robo-Dance Championship</Text>
-        <Button>Start Game</Button>
-      </SC.Container>
-    </Layout>
+    <SC.Container>
+      <Text type="h1">The Robo-Dance Championship</Text>
+      <Button onClick={() => setAppState(AppStates.SET_NAME)}>
+        Start Game
+      </Button>
+    </SC.Container>
   );
 };
 

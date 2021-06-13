@@ -12,11 +12,14 @@ const SC = {
     ({ theme }) => css`
       width: 100%;
       height: 70px;
-      padding-left: ${theme.spacing.lg};
+      padding: ${theme.spacing.md};
       display: flex;
       justify-content: center;
-      align-items: center;
       background-color: ${theme.palette.neutral};
+
+      > * {
+        margin: 0 ${theme.spacing.md};
+      }
     `
   ),
   BodyContainer: styled.div(
