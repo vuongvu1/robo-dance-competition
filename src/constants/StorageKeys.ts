@@ -1,6 +1,6 @@
 const StorageKeys = {
   APP_STATE: "APP_STATE",
-  TEAM_INFO: "TEAM_INFO",
+  TEAMS_INFO: "TEAMS_INFO",
   SCORE: "SCORE",
 };
 

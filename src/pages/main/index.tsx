@@ -1,12 +1,22 @@
+import { useStateWithLocalStorage } from "src/hooks";
+import { StorageKeys } from "src/constants";
 import { Text, Button } from "src/atoms";
-import SC from "./styles";
+import { MainLayout } from "src/components";
+// import SC from "./styles";
 
 const Main = () => {
+  const [teamsInfo, setTeamsInfo] = useStateWithLocalStorage(
+    StorageKeys.TEAMS_INFO
+  );
+
+  console.log({ teamsInfo });
+
   return (
-    <SC.Container>
-      <Text type="h1">Main</Text>
-      <Button>Start Main</Button>
-    </SC.Container>
+    <MainLayout
+      leftContent="leftContent"
+      rightContent="rightContent"
+      bottomContent={<Button>Set team names</Button>}
+    />
   );
 };
 

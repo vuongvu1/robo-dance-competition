@@ -5,7 +5,13 @@ const SC = {
     ({ theme }) => css`
       cursor: pointer;
       padding: ${theme.spacing.sm} ${theme.spacing.md};
-      border: 1px solid ${theme.palette.black};
+      border: none;
+      background-color: ${theme.palette.light};
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.6;
+      }
     `
   ),
 };
