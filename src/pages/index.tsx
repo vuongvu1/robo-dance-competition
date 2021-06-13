@@ -4,7 +4,7 @@ import { ResetButton, InstructionsButton } from "src/components";
 import { useStateWithLocalStorage } from "src/hooks";
 import { AppStates, StorageKeys } from "src/constants";
 import Home from "./home";
-import Main from "./main";
+import Setup from "./setup";
 
 const Pages = () => {
   const [appState, setAppState] = useStateWithLocalStorage(
@@ -15,39 +15,35 @@ const Pages = () => {
     if (!appState) setAppState(AppStates.HOME);
   }, [appState, setAppState]);
 
-  const renderScreen = (state: string) => {
-    switch (state) {
-      case AppStates.HOME:
-        return (
-          <Layout>
-            <Home setAppState={setAppState} />
-          </Layout>
-        );
+  switch (appState) {
+    case AppStates.HOME:
+      return (
+        <Layout>
+          <Home setAppState={setAppState} />
+        </Layout>
+      );
 
-      case AppStates.SET_NAME:
-        return (
-          <Layout
-            title={
-              <>
-                <ResetButton />
-                <InstructionsButton />
-              </>
-            }
-          >
-            <Main />
-          </Layout>
-        );
+    case AppStates.SET_NAME:
+      return (
+        <Layout
+          title={
+            <>
+              <ResetButton />
+              <InstructionsButton />
+            </>
+          }
+        >
+          <Setup setAppState={setAppState} />
+        </Layout>
+      );
 
-      default:
-        return (
-          <Layout>
-            <Home setAppState={setAppState} />
-          </Layout>
-        );
-    }
-  };
-
-  return renderScreen(appState);
+    default:
+      return (
+        <Layout>
+          <Home setAppState={setAppState} />
+        </Layout>
+      );
+  }
 };
 
 export default Pages;
