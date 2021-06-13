@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Layout, Link } from "src/atoms";
+import { ResetButton } from "src/components";
 import { useStateWithLocalStorage } from "src/hooks";
 import { AppStates, StorageKeys } from "src/constants";
 import Home from "./home";
@@ -14,10 +15,9 @@ const Pages = () => {
     if (!appState) setAppState(AppStates.HOME);
   }, [appState, setAppState]);
 
-  const ResetBtn = <Link onClick={() => console.log("Reset")}>Reset</Link>;
   const RulesBtn = <Link onClick={() => console.log("Rules")}>Rules</Link>;
 
-  const renderPages = (state: string) => {
+  const renderScreen = (state: string) => {
     switch (state) {
       case AppStates.HOME:
         return (
@@ -31,7 +31,7 @@ const Pages = () => {
           <Layout
             title={
               <>
-                {ResetBtn}
+                <ResetButton />
                 {RulesBtn}
               </>
             }
@@ -49,7 +49,7 @@ const Pages = () => {
     }
   };
 
-  return renderPages(appState);
+  return renderScreen(appState);
 };
 
 export default Pages;

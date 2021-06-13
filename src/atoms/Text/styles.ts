@@ -4,8 +4,8 @@ const SC = {
   Container: styled.div<{ type?: "h1" | "h2" | "body"; color?: string }>(
     ({ theme, type, color }) => css`
       color: ${color || theme.palette.black};
-      font-weight: normal;
-      font-size: ${theme.fontSize.md};
+      font-weight: ${theme.fontWeight.md};
+      font-size: ${theme.fontSize.sm};
 
       ${type === "h1" &&
       css`
