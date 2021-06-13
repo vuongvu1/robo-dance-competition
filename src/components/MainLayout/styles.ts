@@ -7,7 +7,7 @@ const SC = {
     flex-direction: column;
   `,
   TeamsWrapper: styled.section`
-    flex: 3;
+    flex: 2;
     display: flex;
   `,
   Team: styled.div(
@@ -24,8 +24,10 @@ const SC = {
   `,
   BottomSection: styled.section`
     flex: 1;
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
   `,
 };
 

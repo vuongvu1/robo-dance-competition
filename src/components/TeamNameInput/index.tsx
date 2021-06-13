@@ -8,7 +8,7 @@ type Props = {
   setName: (name: string) => void;
 };
 
-const SetTeamName: FC<Props> = ({ number, name, setName }) => {
+const TeamNameInput: FC<Props> = ({ number, name, setName }) => {
   return (
     <SC.Wrapper>
       <Text type="h2">Team {number}</Text>
@@ -21,4 +21,4 @@ const SetTeamName: FC<Props> = ({ number, name, setName }) => {
   );
 };
 
-export default SetTeamName;
+export default TeamNameInput;

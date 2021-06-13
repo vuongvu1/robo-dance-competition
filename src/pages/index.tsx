@@ -3,8 +3,9 @@ import { Layout } from "src/atoms";
 import { ResetButton, InstructionsButton } from "src/components";
 import { useStateWithLocalStorage } from "src/hooks";
 import { AppStates, StorageKeys } from "src/constants";
-import Home from "./home";
-import Setup from "./setup";
+import HomeScreen from "./home";
+import SetupScreen from "./setup";
+import AssigningScreen from "./assigning";
 
 const Pages = () => {
   const [appState, setAppState] = useStateWithLocalStorage(
@@ -19,7 +20,7 @@ const Pages = () => {
     case AppStates.HOME:
       return (
         <Layout>
-          <Home setAppState={setAppState} />
+          <HomeScreen setAppState={setAppState} />
         </Layout>
       );
 
@@ -33,14 +34,21 @@ const Pages = () => {
             </>
           }
         >
-          <Setup setAppState={setAppState} />
+          <SetupScreen setAppState={setAppState} />
+        </Layout>
+      );
+
+    case AppStates.ASSIGNING_ROBOTS:
+      return (
+        <Layout title={<ResetButton />}>
+          <AssigningScreen setAppState={setAppState} />
         </Layout>
       );
 
     default:
       return (
         <Layout>
-          <Home setAppState={setAppState} />
+          <HomeScreen setAppState={setAppState} />
         </Layout>
       );
   }
