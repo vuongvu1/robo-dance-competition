@@ -6,8 +6,6 @@ const SC = {
       color: ${color || theme.palette.black};
       font-weight: normal;
       font-size: ${theme.fontSize.md};
-      margin: 0;
-      padding: 0;
 
       ${type === "h1" &&
       css`
