@@ -8,7 +8,7 @@ const RobotDetailSmall: FC<RobotType> = ({ name, avatar, experience }) => {
     <SC.Wrapper>
       <SC.Image src={avatar} />
       <Text type="body">
-        {name} ({experience})
+        {name} (exp: {experience})
       </Text>
     </SC.Wrapper>
   );

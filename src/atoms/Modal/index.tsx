@@ -37,7 +37,7 @@ const Modal: FC<Props> = ({ visible, close, title, children }) => {
           <CloseIcon />
         </SC.CloseWrapper>
         <SC.Title>
-          <Text type="h2">{title}</Text>
+          <Text type="h3">{title}</Text>
         </SC.Title>
         {children}
       </SC.Wrapper>

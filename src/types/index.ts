@@ -8,12 +8,17 @@ export type RobotType = {
 };
 
 export type TeamsInfoType = {
-  teamOne?: {
-    name?: string;
-    robots?: RobotType[];
+  teamOne: {
+    name: string;
+    robots: RobotType[];
   };
-  teamTwo?: {
-    name?: string;
-    robots?: RobotType[];
+  teamTwo: {
+    name: string;
+    robots: RobotType[];
   };
+};
+
+export type LeaderBoardType = {
+  teamOne: number;
+  teamTwo: number;
 };

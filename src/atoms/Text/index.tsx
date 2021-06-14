@@ -2,7 +2,7 @@ import React from "react";
 import SC from "./styles";
 
 interface Props {
-  type?: "h1" | "h2" | "body";
+  type?: "h1" | "h2" | "h3" | "body";
   color?: string;
 }
 

@@ -9,7 +9,7 @@ interface Props {
 const Button: React.FC<Props> = ({ onClick, children }) => {
   return (
     <SC.Container onClick={onClick}>
-      <Text type="body">{children}</Text>
+      <Text type="h3">{children}</Text>
     </SC.Container>
   );
 };

@@ -4,13 +4,17 @@ const SC = {
   Container: styled.button(
     ({ theme }) => css`
       cursor: pointer;
-      padding: ${theme.spacing.sm} ${theme.spacing.md};
+      padding: ${theme.spacing.sm} ${theme.spacing.lg};
       border: none;
       background-color: ${theme.palette.light};
       transition: opacity 0.3s;
 
       &:hover {
         opacity: 0.6;
+      }
+
+      > * {
+        margin: 0;
       }
     `
   ),

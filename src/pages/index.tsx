@@ -7,6 +7,7 @@ import HomeScreen from "./home";
 import SetupScreen from "./setup";
 import AssigningScreen from "./assigning";
 import ReadyScreen from "./ready";
+import DancingScreen from "./dancing";
 
 const Pages = () => {
   const [appState, setAppState] = useStateWithLocalStorage(
@@ -57,6 +58,13 @@ const Pages = () => {
           }
         >
           <ReadyScreen setAppState={setAppState} />
+        </Layout>
+      );
+
+    case AppStates.DANCING:
+      return (
+        <Layout>
+          <DancingScreen setAppState={setAppState} />
         </Layout>
       );
 

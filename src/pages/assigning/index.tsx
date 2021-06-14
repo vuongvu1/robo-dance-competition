@@ -12,6 +12,8 @@ type Props = {
   setAppState: (state: string) => void;
 };
 
+const TOTAl_ROBOTS = 10;
+
 const AssigningScreen: FC<Props> = ({ setAppState }) => {
   const [teamOneRobots, setTeamOneRobots] = useState<RobotType[]>([]);
   const [teamTwoRobots, setTeamTwoRobots] = useState<RobotType[]>([]);
@@ -33,12 +35,12 @@ const AssigningScreen: FC<Props> = ({ setAppState }) => {
       const randomNums = getRandomNumbersArray();
       let robotIndex = 0;
 
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < TOTAl_ROBOTS; i++) {
         const setTeamRobots = i % 2 === 0 ? setTeamOneRobots : setTeamTwoRobots;
 
         // eslint-disable-next-line no-loop-func
         setTeamRobots((robots) => {
-          let picked = false;
+          let hasPicked = false;
 
           const currentRobots = [...robots];
           const randomNum = randomNums.pop() || 1;
@@ -47,14 +49,14 @@ const AssigningScreen: FC<Props> = ({ setAppState }) => {
             0
           );
 
-          while (!picked) {
+          while (!hasPicked) {
             robotIndex = (robotIndex + randomNum) % workingRobots.length;
             const randomRobot = workingRobots.splice(robotIndex, 1)[0];
             const totalExp = currentTotalExp + randomRobot.experience;
             const safeExp = (currentRobots.length + 1) * 10;
             if (totalExp <= safeExp) {
               currentRobots.push(randomRobot);
-              picked = true;
+              hasPicked = true;
             }
           }
 

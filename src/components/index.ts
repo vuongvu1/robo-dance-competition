@@ -5,3 +5,4 @@ export { default as InstructionsModal } from "./InstructionsModal";
 export { default as MainLayout } from "./MainLayout";
 export { default as TeamNameInput } from "./TeamNameInput";
 export { default as TeamList } from "./TeamList";
+export { default as TeamIndividual } from "./TeamIndividual";

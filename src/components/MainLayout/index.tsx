@@ -18,7 +18,7 @@ const MainLayout: FC<Props> = ({
       <SC.TeamsWrapper>
         <SC.Team>{leftContent}</SC.Team>
         <SC.MiddleText>
-          <Text type="h2">VS</Text>
+          <Text type="h3">VS</Text>
         </SC.MiddleText>
         <SC.Team>{rightContent}</SC.Team>
       </SC.TeamsWrapper>
