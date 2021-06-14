@@ -8,6 +8,7 @@ const SC = {
       justify-content: flex-start;
       align-items: center;
       margin-top: ${theme.spacing.md};
+      text-align: left;
     `
   ),
   Image: styled.img(

@@ -2,6 +2,9 @@ export type RobotType = {
   id: number;
   name: string;
   avatar: string;
+  outOfOrder: boolean;
+  experience: number;
+  powermove: string;
 };
 
 export type TeamsInfoType = {

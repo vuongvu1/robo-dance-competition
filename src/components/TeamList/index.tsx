@@ -13,8 +13,8 @@ const TeamList: FC<Props> = ({ name, robots }) => {
   return (
     <SC.Wrapper>
       <Text type="h2">{name}</Text>
-      {robots.map(({ name, id, avatar }) => (
-        <RobotDetailSmall key={id} name={name} avatar={avatar} />
+      {robots.map((robot) => (
+        <RobotDetailSmall key={robot.id} {...robot} />
       ))}
     </SC.Wrapper>
   );

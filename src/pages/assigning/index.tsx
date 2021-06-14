@@ -5,14 +5,11 @@ import { Text } from "src/atoms";
 import { MainLayout, TeamList } from "src/components";
 import { TeamsInfoType, RobotType } from "src/types";
 import { Spinner } from "src/assets/icons";
-import { fetchRobots } from "src/apiClient";
+import { fetchRobots } from "src/apis";
+import { delay, getRandomNumbersArray } from "src/utils";
 
 type Props = {
   setAppState: (state: string) => void;
-};
-
-const delay = (ms: number) => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
 const AssigningScreen: FC<Props> = ({ setAppState }) => {
@@ -29,13 +26,41 @@ const AssigningScreen: FC<Props> = ({ setAppState }) => {
 
   useEffect(() => {
     (async () => {
-      const allRobots = await fetchRobots();
-      // do something
+      const workingRobots = ((await fetchRobots()) as RobotType[]).filter(
+        ({ outOfOrder }) => !outOfOrder
+      );
 
-      for (let i = 0; i < 10; i = i + 2) {
-        setTeamOneRobots((robots) => robots.concat(allRobots[i]));
-        await delay(1000);
-        setTeamTwoRobots((robots) => robots.concat(allRobots[i + 1]));
+      const randomNums = getRandomNumbersArray();
+      let robotIndex = 0;
+
+      for (let i = 0; i < 10; i++) {
+        const setTeamRobots = i % 2 === 0 ? setTeamOneRobots : setTeamTwoRobots;
+
+        // eslint-disable-next-line no-loop-func
+        setTeamRobots((robots) => {
+          let picked = false;
+
+          const currentRobots = [...robots];
+          const randomNum = randomNums.pop() || 1;
+          const currentTotalExp = currentRobots.reduce(
+            (exp, robot) => exp + robot.experience,
+            0
+          );
+
+          while (!picked) {
+            robotIndex = (robotIndex + randomNum) % workingRobots.length;
+            const randomRobot = workingRobots.splice(robotIndex, 1)[0];
+            const totalExp = currentTotalExp + randomRobot.experience;
+            const safeExp = (currentRobots.length + 1) * 10;
+            if (totalExp <= safeExp) {
+              currentRobots.push(randomRobot);
+              picked = true;
+            }
+          }
+
+          return currentRobots;
+        });
+
         await delay(1000);
       }
 
