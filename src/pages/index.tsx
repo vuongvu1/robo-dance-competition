@@ -6,6 +6,7 @@ import { AppStates, StorageKeys } from "src/constants";
 import HomeScreen from "./home";
 import SetupScreen from "./setup";
 import AssigningScreen from "./assigning";
+import ReadyScreen from "./ready";
 
 const Pages = () => {
   const [appState, setAppState] = useStateWithLocalStorage(
@@ -40,8 +41,22 @@ const Pages = () => {
 
     case AppStates.ASSIGNING_ROBOTS:
       return (
-        <Layout title={<ResetButton />}>
+        <Layout>
           <AssigningScreen setAppState={setAppState} />
+        </Layout>
+      );
+
+    case AppStates.READY:
+      return (
+        <Layout
+          title={
+            <>
+              <ResetButton />
+              <InstructionsButton />
+            </>
+          }
+        >
+          <ReadyScreen setAppState={setAppState} />
         </Layout>
       );
 

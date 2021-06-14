@@ -64,7 +64,7 @@ const AssigningScreen: FC<Props> = ({ setAppState }) => {
         await delay(1000);
       }
 
-      setAppState(AppStates.ROBOTS_ASSIGNED);
+      setAppState(AppStates.READY);
     })();
   }, [setAppState]);
 
