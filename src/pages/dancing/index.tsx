@@ -6,6 +6,7 @@ import { MainLayout, TeamIndividual } from "src/components";
 import { TeamsInfoType, LeaderBoardType } from "src/types";
 import { Spinner } from "src/assets/icons";
 import { delay, shuffle, getRandomNumbersArray } from "src/utils";
+import { postDanceResult } from "src/apis";
 
 type Props = {
   setAppState: (state: string) => void;
@@ -21,6 +22,7 @@ const DancingScreen: FC<Props> = ({ setAppState }) => {
   const [teamTwoCompetingRobot, setTeamTwoCompetingRobot] = useState();
   const [winner, setWinner] = useState<number>(NO_TEAM);
   const [score, setScore] = useState(0);
+  const [finalResult, setFinalResult] = useState<Record<any, any>>([]);
 
   const [teamsInfo] = useStateWithLocalStorage(StorageKeys.TEAMS_INFO);
   const [round, setRound] = useStateWithLocalStorage(StorageKeys.ROUND);
@@ -41,9 +43,14 @@ const DancingScreen: FC<Props> = ({ setAppState }) => {
       const randomNums = getRandomNumbersArray();
 
       for (let i = 0; i < TOTAL_ROUNDS; i++) {
-        setTeamOneCompetingRobot(teamOneRobots[i]);
-        setTeamTwoCompetingRobot(teamTwoRobots[i]);
+        const teamOneCandidate = teamOneRobots[i];
+        const teamTwoCandidate = teamTwoRobots[i];
+
+        setTeamOneCompetingRobot(teamOneCandidate);
+        setTeamTwoCompetingRobot(teamTwoCandidate);
+
         await delay(2000);
+
         const randomWinner = ((randomNums.pop() || 0) + i) % 2;
         setWinner(randomWinner);
         setScore((currentScore) => {
@@ -51,6 +58,14 @@ const DancingScreen: FC<Props> = ({ setAppState }) => {
             ? currentScore + 10
             : currentScore + 1;
         });
+        const opponents = [teamOneCandidate.id, teamTwoCandidate.id];
+        setFinalResult((result) =>
+          result.concat({
+            opponents,
+            winner: opponents[randomWinner],
+          })
+        );
+
         await delay(2000);
         setWinner(NO_TEAM);
       }
@@ -64,7 +79,7 @@ const DancingScreen: FC<Props> = ({ setAppState }) => {
   const teamTwoScore = score % 10;
 
   useEffect(() => {
-    if (teamOneScore + teamTwoScore === TOTAL_ROUNDS) {
+    if (finalResult.length === TOTAL_ROUNDS) {
       const winner = teamOneScore > teamTwoScore ? TEAM_ONE : TEAM_TWO;
       let newLeaderBoard;
       if (leaderBoard) {
@@ -80,8 +95,9 @@ const DancingScreen: FC<Props> = ({ setAppState }) => {
         };
       }
       setLeaderBoard(JSON.stringify(newLeaderBoard));
+      postDanceResult({ danceoffs: finalResult });
     }
-  }, [teamOneScore, teamTwoScore]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [teamOneScore, teamTwoScore, finalResult]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <MainLayout

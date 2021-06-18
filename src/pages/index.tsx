@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { Layout } from "src/atoms";
-import { ResetButton, InstructionsButton } from "src/components";
+import {
+  ResetButton,
+  InstructionsButton,
+  LeaderboardButton,
+} from "src/components";
 import { useStateWithLocalStorage } from "src/hooks";
 import { AppStates, StorageKeys } from "src/constants";
 import HomeScreen from "./home";
@@ -54,6 +58,7 @@ const Pages = () => {
             <>
               <ResetButton />
               <InstructionsButton />
+              <LeaderboardButton />
             </>
           }
         >

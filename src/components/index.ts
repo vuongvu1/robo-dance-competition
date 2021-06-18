@@ -2,6 +2,8 @@ export { default as ResetButton } from "./ResetButton";
 export { default as ResetModal } from "./ResetModal";
 export { default as InstructionsButton } from "./InstructionsButton";
 export { default as InstructionsModal } from "./InstructionsModal";
+export { default as LeaderboardButton } from "./LeaderboardButton";
+export { default as LeaderboardModal } from "./LeaderboardModal";
 export { default as MainLayout } from "./MainLayout";
 export { default as TeamNameInput } from "./TeamNameInput";
 export { default as TeamList } from "./TeamList";

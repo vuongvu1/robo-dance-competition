@@ -22,3 +22,10 @@ export type LeaderBoardType = {
   teamOne: number;
   teamTwo: number;
 };
+
+export type ResultType = {
+  id: number;
+  winner: number;
+  loser: number;
+  danceAt: string;
+};
