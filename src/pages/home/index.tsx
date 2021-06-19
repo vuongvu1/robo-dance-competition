@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, useEffect, useCallback } from "react";
 import { Text, Button } from "src/atoms";
 import { AppStates } from "src/constants";
+import { useKeyPress } from "src/hooks";
 import SC from "./styles";
 
 type Props = {
@@ -8,12 +9,21 @@ type Props = {
 };
 
 const Home: FC<Props> = ({ setAppState }) => {
+  const isEnterPressed = useKeyPress("Enter");
+
+  const goToNextPage = useCallback(() => {
+    setAppState(AppStates.SET_NAME);
+  }, [setAppState]);
+
+  useEffect(() => {
+    if (isEnterPressed) goToNextPage();
+  }, [isEnterPressed, goToNextPage]);
+
   return (
     <SC.Container>
       <Text type="h1">The Robo-Dance Championship</Text>
-      <Button onClick={() => setAppState(AppStates.SET_NAME)}>
-        Start Game
-      </Button>
+      <Text type="body">Press [Enter]</Text>
+      <Button onClick={goToNextPage}>Start Game</Button>
     </SC.Container>
   );
 };

@@ -1,5 +1,5 @@
-import { FC, useEffect } from "react";
-import { useStateWithLocalStorage } from "src/hooks";
+import { FC, useEffect, useCallback } from "react";
+import { useStateWithLocalStorage, useKeyPress } from "src/hooks";
 import { StorageKeys, AppStates } from "src/constants";
 import { Text, Button } from "src/atoms";
 import { MainLayout, TeamList } from "src/components";
@@ -10,8 +10,17 @@ type Props = {
 };
 
 const ReadyScreen: FC<Props> = ({ setAppState }) => {
+  const isEnterPressed = useKeyPress("Enter");
   const [teamsInfo] = useStateWithLocalStorage(StorageKeys.TEAMS_INFO);
   const [round, setRound] = useStateWithLocalStorage(StorageKeys.ROUND);
+
+  const goToNextPage = useCallback(() => {
+    setAppState(AppStates.DANCING);
+  }, [setAppState]);
+
+  useEffect(() => {
+    if (isEnterPressed) goToNextPage();
+  }, [isEnterPressed, goToNextPage]);
 
   useEffect(() => {
     if (!round) setRound("1");
@@ -38,9 +47,8 @@ const ReadyScreen: FC<Props> = ({ setAppState }) => {
       bottomContent={
         <>
           <Text type="h2">Round {round}</Text>
-          <Button onClick={() => setAppState(AppStates.DANCING)}>
-            Let's Dance!
-          </Button>
+          <Text type="body">Press [Enter]</Text>
+          <Button onClick={goToNextPage}>Let's Dance!</Button>
         </>
       }
     />

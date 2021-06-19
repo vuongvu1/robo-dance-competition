@@ -1,8 +1,7 @@
-import { useState, FC } from "react";
-import { useStateWithLocalStorage } from "src/hooks";
-import { StorageKeys } from "src/constants";
-import { AppStates } from "src/constants";
-import { Button } from "src/atoms";
+import { useState, FC, useEffect, useCallback } from "react";
+import { useStateWithLocalStorage, useKeyPress } from "src/hooks";
+import { StorageKeys, AppStates } from "src/constants";
+import { Button, Text } from "src/atoms";
 import { MainLayout, TeamNameInput } from "src/components";
 import { TeamsInfoType } from "src/types";
 
@@ -11,6 +10,7 @@ type Props = {
 };
 
 const Setup: FC<Props> = ({ setAppState }) => {
+  const isEnterPressed = useKeyPress("Enter");
   const [teamsInfo, setTeamsInfo] = useStateWithLocalStorage(
     StorageKeys.TEAMS_INFO
   );
@@ -22,7 +22,7 @@ const Setup: FC<Props> = ({ setAppState }) => {
   const [teamOneName, setTeamOneName] = useState(teamOne?.name || "");
   const [teamTwoName, setTeamTwoName] = useState(teamTwo?.name || "");
 
-  const onClickSet = () => {
+  const goToNextPage = useCallback(() => {
     const info = {
       teamOne: { name: teamOneName || "Team 1" },
       teamTwo: { name: teamTwoName || "Team 2" },
@@ -30,7 +30,11 @@ const Setup: FC<Props> = ({ setAppState }) => {
 
     setTeamsInfo(JSON.stringify(info));
     setTimeout(() => setAppState(AppStates.ASSIGNING_ROBOTS), 0);
-  };
+  }, [setAppState, setTeamsInfo, teamOneName, teamTwoName]);
+
+  useEffect(() => {
+    if (isEnterPressed) goToNextPage();
+  }, [isEnterPressed, goToNextPage]);
 
   return (
     <MainLayout
@@ -40,7 +44,12 @@ const Setup: FC<Props> = ({ setAppState }) => {
       rightContent={
         <TeamNameInput number={2} name={teamTwoName} setName={setTeamTwoName} />
       }
-      bottomContent={<Button onClick={onClickSet}>Set Team Names</Button>}
+      bottomContent={
+        <>
+          <Text type="body">Press [Enter]</Text>
+          <Button onClick={goToNextPage}>Set Team Names</Button>
+        </>
+      }
     />
   );
 };
