@@ -4,7 +4,6 @@ const AppStates = {
   ASSIGNING_ROBOTS: "ASSIGNING_ROBOTS",
   READY: "READY",
   DANCING: "DANCING",
-  COMPETED: "COMPETED",
 };
 
 export default AppStates;

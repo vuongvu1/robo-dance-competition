@@ -103,20 +103,24 @@ const LeaderboardModal: FC<Props> = ({ visible, setVisible }) => {
           </li>
         </ul>
         <SC.Table>
-          <tr>
-            <th>{teamOneInfo.name}</th>
-            <th>{teamTwoInfo.name}</th>
-          </tr>
-          {formattedResults.map((result) => (
-            <tr key={result.id}>
-              <SC.Td isWinner={result.teamOne.isWinner}>
-                {result.teamOne.name}
-              </SC.Td>
-              <SC.Td isWinner={result.teamTwo.isWinner}>
-                {result.teamTwo.name}
-              </SC.Td>
+          <thead>
+            <tr>
+              <th>{teamOneInfo.name}</th>
+              <th>{teamTwoInfo.name}</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {formattedResults.map((result) => (
+              <tr key={result.id}>
+                <SC.Td isWinner={result.teamOne.isWinner}>
+                  {result.teamOne.name}
+                </SC.Td>
+                <SC.Td isWinner={result.teamTwo.isWinner}>
+                  {result.teamTwo.name}
+                </SC.Td>
+              </tr>
+            ))}
+          </tbody>
         </SC.Table>
       </SC.Wrapper>
     </Modal>
